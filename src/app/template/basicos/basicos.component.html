@@ -1,0 +1,94 @@
+<h2>Template <small> Básicos</small></h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        
+        <form   (ngSubmit)="guardar()"
+                #miFormulario="ngForm"
+                autocomplete="off">
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Productos</label>
+                <div class="col-sm-9">
+                    <input  required
+                            minlength="3"
+                            type="text"
+                            class="form-control"
+                            placeholer="Nombre del producto"
+                            name="producto"
+                            [ngModel] = "initForm.producto">
+                    
+                    <span   *ngIf="nombreValido()"
+                            class="form-text text-danger">
+                        Debe de ser de 3 letras
+                    </span>
+
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input  required
+                            min="0"
+                            type="number"
+                            class="form-control"
+                            placeholer="Precio del producto"
+                            name="precio"
+                            [ngModel] = "initForm.precio">
+
+                    <span   *ngIf="precioValido()"
+                            class="form-text text-danger">
+                        El precio debe ser mayor a cero
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input  required
+                            type="number"
+                            class="form-control"
+                            placeholer="Existencias del producto"
+                            name="existencias"
+                            customMin
+                            [minimo]="0"
+                            [ngModel] = "initForm.existenias">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end"
+                            [disabled]="miFormulario.invalid">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+            
+        </form>
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre>{{ miFormulario.valid }}</pre>
+        
+        <span>Invalid</span>
+        <pre>{{ miFormulario.invalid }}</pre>
+        
+        <span>Pristine</span>
+        <pre>{{ miFormulario.pristine }}</pre>
+        
+        <span>Touched</span>
+        <pre>{{ miFormulario.touched }}</pre>
+        
+        <span>Valor</span>
+        <pre>{{ miFormulario.value | json }}</pre>
+    </div>
+</div>

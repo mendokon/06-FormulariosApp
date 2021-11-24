@@ -1,0 +1,109 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="cl">
+        
+        <form   autocomplete="off"
+                [formGroup]="miFormulario"
+                (ngSubmit)="submitFormulario()">
+
+            <!-- NOMBRE -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label"> Nombre</label>
+                
+                <div class="col-sm-9">
+                    <input  type="text"
+                            class="form-control"
+                            placeholder="Nombre del usuario"
+                            formControlName="nombre">
+                    
+                    <span   *ngIf="campoValido('nombre')"
+                            class="form-text text-danger">
+                        Debe ser en formato de Nombre y Apellido
+                    </span>    
+                </div>
+            </div>
+            
+            <!-- EMAIL -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label"> Email</label>
+                
+                <div class="col-sm-9">
+                    <input  type="email"
+                            class="form-control"
+                            placeholder="Email del usuario"
+                            formControlName="email">
+                    <span   *ngIf="campoValido('email')"
+                            class="form-text text-danger">
+                        El Email es obligatorio
+                    </span>  
+                </div>
+            </div>
+            
+            <!-- USER NAME -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label"> Username</label>
+                
+                <div class="col-sm-9">
+                    <input  type="text"
+                    class="form-control"
+                    placeholder="Nombre código del usuario"
+                    formControlName="username">
+                    
+                    <span   *ngIf="campoValido('username')"
+                            class="form-text text-danger">
+                        El usuario "{{miFormulario.controls.username.value}}" ya existe
+                    </span>  
+                    
+                </div>
+            </div>
+            
+            
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label"> Password</label>
+                
+                <div class="col-sm-9">
+                    <input  type="password"
+                            class="form-control"
+                            placeholder="Password de su cuenta">
+                </div>
+            </div>
+            
+            <!-- Password 2 -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label"> Confirmar</label>
+                
+                <div class="col-sm-9">
+                    <input  type="password"
+                            class="form-control"
+                            placeholder="Confirmar la contraseña">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end"
+                            (click)="submitFormulario()">
+                        Crear
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<h2>Form Valid: {{ miFormulario.valid }}</h2>
+
+<h5>Nombre: mostrar Errores</h5>
+<pre> {{ miFormulario.controls.nombre.errors | json }}</pre>
+
+<h5>Email Valid?</h5>
+<pre> {{ miFormulario.controls.email.valid| json }}</pre>
+
+<h5>Username</h5>
+<pre> {{ miFormulario.controls.username.errors| json }}</pre>
